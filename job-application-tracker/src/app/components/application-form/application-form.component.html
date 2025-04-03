@@ -1,0 +1,17 @@
+<form (ngSubmit)="onSubmit()">
+  <label for="company">Company Name:</label>
+  <input id="company" type="text" [(ngModel)]="companyName" name="companyName" required />
+
+  <label for="position">Position:</label>
+  <input id="position" type="text" [(ngModel)]="position" name="position" required />
+
+  <label for="status">Status:</label>
+  <select id="status" [(ngModel)]="status" name="status">
+    <option>Applied</option>
+    <option>Interview</option>
+    <option>Offer</option>
+    <option>Rejected</option>
+  </select>
+
+  <button type="submit">Submit</button>
+</form>

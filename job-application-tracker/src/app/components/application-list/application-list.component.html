@@ -1,0 +1,40 @@
+<table>
+  <thead>
+  <tr>
+    <th>Company Name</th>
+    <th>Position</th>
+    <th>Status</th>
+    <th>Date Applied</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let app of applications.slice((page - 1) * pageSize, page * pageSize)">
+    <td>{{ app.companyName }}</td>
+    <td>{{ app.position }}</td>
+    <td>
+      <select [value]="app.status" (change)="onStatusChange($event, app)">
+        <option>Applied</option>
+        <option>Interview</option>
+        <option>Offer</option>
+        <option>Rejected</option>
+      </select>
+    </td>
+    <td>{{ app.dateApplied | date }}</td>
+    <td>
+      <a [routerLink]="['/edit', app.id]">Edit</a> |
+      <button (click)="deleteApplication(app)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="showNoDataMessage" style="margin-top: 1rem; color: red;">
+  No applications found. Redirecting to add form...
+</div>
+
+<div style="margin-top: 1rem;">
+  <button (click)="page = page - 1" [disabled]="page === 1">Prev</button>
+  <span style="margin: 0 1rem;">Page {{ page }}</span>
+  <button (click)="page = page + 1" [disabled]="page * pageSize >= applications.length">Next</button>
+</div>
